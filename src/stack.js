@@ -27,13 +27,11 @@ const { NotImplementedError } = require('../extensions/index.js');
 
   pop() {
     if (this.items.length === 0) return null;
-
     return this.items.pop();
   }
 
   peek() {
     if (this.length === 0) return null;
-
     return this.items[this.items.length - 1];
   }
  }

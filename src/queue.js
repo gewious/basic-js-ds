@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
+ const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
@@ -22,6 +22,7 @@ class Queue {*/
     this.elements = {};
     this.head = null;
     this.tail = null;
+    this.next = null;
     }
 
   getUnderlyingList() {
@@ -38,7 +39,7 @@ class Queue {*/
     delete this.elements[this.head];
     this.head++;
   }
-  
+
 }
 
 
