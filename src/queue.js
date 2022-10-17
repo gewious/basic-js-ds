@@ -17,29 +17,36 @@ const { NotImplementedError } = require('../extensions/index.js');
 class Queue {*/
 
   class Queue {
-
-    constructor () {
-    this.elements = {};
-    this.head = null;
-    this.tail = null;
-    this.next = null;
+      object = {
+      value: null,
+      next: null
     }
 
   getUnderlyingList() {
-    return this.elements[this.head];
+    return this.object;
   }
 
-  enqueue(element) {
-    this.elements[this.tail] = element;
-    this.tail++;
+  enqueue(value) {
+    let obj = this.object;
+    while(obj.next) {
+      obj = obj.next;
+    }
+    if(obj.value) {
+      obj.next = {
+        value: value,
+        next: null
+      }
+    } else {
+      obj.value = value;
+    }
+    return this;
   }
 
-  dequeue(element) {
-    const item = this.elements[this.head];
-    delete this.elements[this.head];
-    this.head++;
+  dequeue(value) {
+    let node = this.object;
+    this.object = node.next;
+    return node.value;
   }
-
 }
 
 

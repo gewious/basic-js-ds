@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { Node } = require('../extensions/list-tree.js');
+ //const { Node } = require('../extensions/list-tree.js');
 
 /**
 * Implement simple binary search tree according to task description
@@ -26,50 +26,53 @@ class BinarySearchTree {
     return this.rootNode;
   }
 
-  
-  add(value) {
-    this.rootNode = addWithin (this.rootNode, value);
 
-    function addWithin (node, value) {
+  add(value) {
+    this.rootNode = addNode(this.rootNode, value);
+
+    function addNode(node, value) {
       if(!node) {
         return new Node(value);
       }
       if (node.value === value) {
         return node;
-      }
+      } 
       if (value < node.value) {
-        node.left = addWithin (node.left, value);
-      } else {
-        node.right = addWithin (node.right, value);
+        node.left = addNode(node.left, value);
+      }
+      else {
+        node.right = addNode(node.right, value);
       }
       return node;
     }
   }
 
-  /*const newNode = new Node(value)
+    /*
+    let newNode = new Node(value);
 
-    if(!this.rootNode) {
+    if (this.rootNode === null) {
       this.rootNode = newNode;
-      return;
+    } else {
+      this.insertNode(this.rootNode, newNode);
     }
-
-    let currentNode = this.rootNode;
-
-    while(currentNode) {
-      if(newNode.value < currentNode.value) {
-        if (!currentNode.left) {
-          currentNode.left = newNode;
-          return;
-        }
-        currentNode = currentNode.left;
+    }
+    insertNode(node, newNode) {
+    if (newNode.value < node.value) {
+      if (node.left === null) {
+        node.left = newNode;
       } else {
-        if(!currentNode.right) {
-          currentNode.right = newNode;
-          return;
-        }
-        currentNode = currentNode.right;
+        this.insertNode(node.left, newNode);
       }
-    }*/
+    } else {
+      if (node.right === null) {
+        node.right = newNode;
+      } else {
+        this.insertNode(node.right, newNode);
+      }
+    }
+  }*/
+
+  
 
   has(value) {
    return searchWithin (this.rootNode, value)
@@ -87,21 +90,21 @@ class BinarySearchTree {
    }
   }
 
-  find(value) {
+ find(value) {
     return findWithin(this.rootNode, value);
 
     function findWithin(node, value) {
-      if (!node) {
+      if (node === null) {
         return null;
       } 
-      else if(node.value === value) {
-        return node;
+      else if(value < node.value) {
+        return findWithin(node.left, value);
       } 
-      else if (node.value > value) {
-        return findWithin (node.left, value);
+      else if (value > node.value) {
+        return findWithin(node.right, value);
       } 
       else {
-        return findWithin (node.right, value);
+        return node;
       }
     }
   }
